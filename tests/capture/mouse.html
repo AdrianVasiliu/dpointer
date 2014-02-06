@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+	<meta name="viewport"
+		  content="width=device-width, initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<title>test mouse events</title>
+
+	<style>
+		html, body {
+			height: 100%;
+			width: 100%;
+			margin: 0;
+			border: 0;
+			padding: 0;
+			overflow: hidden;
+			font-size: 100%;
+			background-color: #000000;
+		}
+
+		#container {
+			height: 200px;
+			width: 200px;
+			background-color: #AAAAAA;
+			margin: 0;
+			top: 0;
+			left: 0;
+			position: absolute;
+			-webkit-touch-callout: none;
+			-webkit-user-select: none;
+			-khtml-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+		}
+
+		#msgArea {
+			color: white;
+			background-color: orange;
+			position: relative;
+			margin: 0;
+			top: 200px;
+			left: 0;
+			padding: 0;
+			color: #000000;
+			overflow: auto;
+			height: 300px;
+		}
+	</style>
+
+	<script>var require = {baseUrl: "../../.."};</script>
+	<script type="text/javascript" src="../../../requirejs/require.js"></script>
+	<script type="text/javascript">
+		requirejs([
+			"dpointer/events",
+			"domReady/domReady!"
+		], function(pointer){
+			var counter = 0;
+			var msgArea = document.getElementById("msgArea");
+			var container = document.getElementById("container");
+			container.addEventListener("pointermove", function(event){
+				logit(event.target.id + ":pointermove (" + 
+					event.clientX + "/" + event.clientY + ")" +
+					" counter: " + counter++);
+			});
+			
+			function logit(msg){
+				msgArea.innerHTML = msg + "</br>" + msgArea.innerHTML;
+			}
+		});
+	</script>
+
+</head>
+<body id="body">
+<div id="container">
+	Place the mouse cursor inside this area, then stop moving and watch the message area below.
+</div>
+<div id="msgArea">== LOG ==</div>
+</body>
+</html>
